@@ -1,0 +1,20 @@
+{% extends "game_board/base.html" %}
+
+{% load static %}
+
+{% block title %}Root{% endblock %}
+
+{% block body %}
+ <!-- Draggable DIV -->
+<div id="mydiv">
+  <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
+  
+      {% for card in cards %}
+      <div id="mydivheader"></div>
+      {{ card.name }}
+        <br>
+        <p>{{ card.text }}</p>
+      </div> 
+      {% endfor %}
+
+{% endblock %}
