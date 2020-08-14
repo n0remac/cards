@@ -1,5 +1,22 @@
 // Make the DIV element draggable:
-dragElement(document.getElementById("mydiv"));
+// dragElement(document.getElementById("mydiv"));
+cards = document.getElementsByClassName("card");
+console.log(cards)
+for (i=0;i<cards.length;i++){
+  console.log(cards[i])
+  dragElement(cards[i])
+}
+
+function runCards(){
+  all_cards = document.getElementsByClassName("card");
+  data = [];
+  for (i=0;i<all_cards.length;i++){
+    data.push(all_cards[i].getElementsByClassName('command')[0].innerHTML);
+    console.log(all_cards[i].getElementsByClassName('command')[0].innerHTML);
+  }
+  console.log(data)
+  return fetchPost(data, 'https://sgp5y79yog.execute-api.us-west-2.amazonaws.com/refinery/run')
+}
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -40,4 +57,14 @@ function dragElement(elmnt) {
     document.onmouseup = null;
     document.onmousemove = null;
   }
+}
+
+function fetchPost(data, url) {
+  return fetch(url, {  
+    method: "POST",  
+    cors: true,
+    body: JSON.stringify(
+      data
+    )
+  }).then(response => response.json());   
 }

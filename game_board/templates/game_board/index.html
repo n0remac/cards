@@ -5,16 +5,19 @@
 {% block title %}Root{% endblock %}
 
 {% block body %}
+{% for card in cards %}
  <!-- Draggable DIV -->
-<div id="mydiv">
+<div class="card">
   <!-- Include a header DIV with the same name as the draggable DIV, followed by "header" -->
-  
-      {% for card in cards %}
-      <div id="mydivheader"></div>
-      {{ card.name }}
-        <br>
-        <p>{{ card.text }}</p>
-      </div> 
-      {% endfor %}
+  {{ card.name }}
+    <br>
+    <p>{{ card.text }}</p>
+    <p class="command" hidden>{{ card.command }}</p>
+</div> 
+{% endfor %}
+
+<button id='run' onclick="runCards('Hello', 'https://sgp5y79yog.execute-api.us-west-2.amazonaws.com/refinery/run')">
+    Run
+</button>
 
 {% endblock %}
