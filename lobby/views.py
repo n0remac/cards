@@ -26,7 +26,6 @@ class Lobby(DetailView):
         for p in Player.objects.filter(needs_match=True):
             # Makes sure player is not matched with self
             if p.id != game_data.get("id"):
-                print("---------------------")
                 game_data.update({"needs_match": False})
                 game_data.update({"opponent": p.id})
                 p.needs_match = False
@@ -53,7 +52,6 @@ class Room(DetailView):
         game_data = request.session["game_data"]
         player = Player.objects.get(id=game_data.get("id"))
         game_data = player.to_dict()
-        print(game_data["opponent"])
         if game_data["opponent"] != 0:
             opponent = Player.objects.get(id=game_data["opponent"])
             game_data.update({"opponent": opponent.name})
