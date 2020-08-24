@@ -12,5 +12,5 @@ A trading card game virtual programming language
 4. Update database  
     `python manage.py makemigrations`  
     `python manage.py migrate`
-5. Start application \n  
+5. Start application 
     `python manage.py runserver`
