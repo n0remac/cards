@@ -1,3 +1,9 @@
+html,body{
+  height: 100%;
+  width: 100%;
+  background: rgb(59,35,21);
+  background: radial-gradient(circle, rgba(59,35,21,1) 16%, rgba(78,46,28,1) 45%, rgba(70,42,26,1) 73%, rgba(45,27,16,1) 81%, rgba(0,0,0,1) 100%); 
+}
 .card {
   position: absolute;
   z-index: 9;
@@ -5,4 +11,39 @@
   background-color: #f1f1f1;
   border: 1px solid #d3d3d3;
   text-align: center;
+}
+.circleBase {
+    position: absolute;
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+}
+.circle1 {
+    width: 350px;
+    height: 350px;
+    background: grey;
+    border: 3px solid black;
+}
+.circle2 {
+    width: 350px;
+    height: 350px;
+    background: grey;
+    border: 3px solid black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-175px, -175px);
+}
+.center {
+  top: 20%;
+  text-align: center;
+  position: relative;
+}
+.player {
+    padding: 50px;
+    font-size: 40%;
+}
+.p1 {
+    float: left;  
+}
+.p2 {
+    float: right;  
 }

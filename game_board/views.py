@@ -8,7 +8,5 @@ class Board(DetailView):
 
     def get(self, request, *args, **kwargs):
         cards = Card.objects.all()
-        context = {"name": Card.name, "text": Card.text, "cards": cards}
+        context = {"cards": cards}
         return render(request, self.template_name, context)
-
-

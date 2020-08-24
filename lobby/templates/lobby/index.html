@@ -1,0 +1,30 @@
+{% extends "game_board/base.html" %}
+
+{% load static %}
+
+{% block title %}Lobby{% endblock %}
+
+{% block body %}
+
+<div class='circleBase circle2'>
+    <div class='center player'>
+        <h1> Welcome player #{{player}}</h1>
+        <form action="/" method="post">
+            {% csrf_token %}
+            <input type="text" name="name" value="player#{{player}}" maxlength="20">
+            <input type=submit value="Join">
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+<!--
+<div class='circleBase circle1'>
+    <div class='center player p1'>
+        <h1>Player 1</h1>
+    </div>
+    <div class='center player p2'>
+        <h1>Player 2</h1>
+    </div>
+</div>
+-->

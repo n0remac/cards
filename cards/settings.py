@@ -26,7 +26,7 @@ SECRET_KEY = '(w*j9(2!u_$c8a#9f+@bwe7=&_g)sxuss-(pte@3k5do%6n2js'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.106']
 
 
 # Application definition
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'game_board.apps.GameBoardConfig'
+    'game_board.apps.GameBoardConfig',
+    'lobby.apps.LobbyConfig',
 ]
 
 MIDDLEWARE = [

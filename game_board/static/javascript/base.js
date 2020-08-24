@@ -1,5 +1,4 @@
 // Make the DIV element draggable:
-// dragElement(document.getElementById("mydiv"));
 cards = document.getElementsByClassName("card");
 console.log(cards)
 for (i=0;i<cards.length;i++){
@@ -7,6 +6,8 @@ for (i=0;i<cards.length;i++){
   dragElement(cards[i])
 }
 
+
+// gets code off cards and sends it to refinery to be ran
 function runCards(){
   all_cards = document.getElementsByClassName("card");
   data = [];
@@ -18,6 +19,8 @@ function runCards(){
   return fetchPost(data, 'https://sgp5y79yog.execute-api.us-west-2.amazonaws.com/refinery/run')
 }
 
+
+// Used to make cards dragable
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById(elmnt.id + "header")) {
