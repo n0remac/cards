@@ -51,6 +51,8 @@ class Room(DetailView):
         """
 
         game_data = request.session["game_data"]
+        player = Player.objects.get(id=game_data.get("id"))
+        game_data = player.to_dict()
         print(game_data["opponent"])
         if game_data["opponent"] != 0:
             opponent = Player.objects.get(id=game_data["opponent"])
