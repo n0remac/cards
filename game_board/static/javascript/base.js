@@ -1,3 +1,11 @@
+function AutoRefresh( t ) {
+   setTimeout("location.reload(true);", t);
+}
+
+function ActivateReady(){
+  document.getElementById('Ready').disabled = 'false'
+}
+
 // Make the DIV element draggable:
 cards = document.getElementsByClassName("card");
 console.log(cards)

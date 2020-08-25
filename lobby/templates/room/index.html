@@ -10,19 +10,18 @@
     <div class='circleBase circle2'>
         <div class='center player p1'>
             <h1>{{name}}</h1>
-            <form action = "/" method = "post" >
-                {% csrf_token %}
-                <input type=submit value="Ready">
-            </form>
         </div>
         <div class='center player p2'>
             <h1>{{opponent}}</h1>
-            <form action = "/" method = "post" >
-                {% csrf_token %}
-                <input type=submit value="Ready">
-            </form>
         </div>
     </div>
 </body>
 
 {% endblock %}
+
+<!--
+        <form class="center" action="/room/" method ="post" >
+            {% csrf_token %}
+            <input id="Ready" type=submit value="Ready">
+        </form>
+-->

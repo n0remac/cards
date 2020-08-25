@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
 from django.shortcuts import redirect
+from django.template import Context, Template
 from .models import Player
 from .utils import get_game
 
@@ -18,8 +19,9 @@ class Lobby(DetailView):
         game_data = request.session["game_data"]
         name = self.request.POST.get("name")
         player = Player.objects.get(id=game_data.get("id"))
+        player.needs_match = True
         player.name = name
-        player.save(update_fields=["name"])
+        player.save(update_fields=["name", "needs_match"])
         game_data.update({"name": name})
 
         # Checks the players that need a match
@@ -54,6 +56,8 @@ class Room(DetailView):
         game_data = player.to_dict()
         if game_data["opponent"] != 0:
             opponent = Player.objects.get(id=game_data["opponent"])
-            game_data.update({"opponent": opponent.name})
-
+            game_data.update({"opponent": opponent.id})
+            game_data.update({"started": False})
+            request.session["game_data"] = game_data
+            return redirect("/game/")
         return render(request, self.template_name, game_data)
