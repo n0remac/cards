@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
 from django.shortcuts import redirect
-from django.template import Context, Template
 from .models import Player
 from .utils import get_game
 

@@ -11,10 +11,10 @@ class Board(DetailView):
         context = {"cards": cards}
         game_data = request.session["game_data"]
         if not game_data["started"]:
-            game_data.update({'started': True})
-            playerID = game_data.get('id')
-            opponentID = game_data.get('opponent')
-            print('-----------------------')
+            game_data.update({"started": True})
+            playerID = game_data.get("id")
+            opponentID = game_data.get("opponent")
+            print("-----------------------")
             print(playerID, opponentID)
             Game.objects.create(player1=playerID, player2=opponentID)
 
