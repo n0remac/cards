@@ -10,25 +10,25 @@ class Lobby(DetailView):
 
     def get(self, request, *args, **kwargs):
         get_game(request)
-        game_data = request.session["game_data"]
-        return render(request, self.template_name, {"player": game_data["id"]})
+        player_data = request.session["player_data"]
+        return render(request, self.template_name, {"player": player_data["id"]})
 
     def post(self, request):
         # update player name
-        game_data = request.session["game_data"]
+        player_data = request.session["player_data"]
         name = self.request.POST.get("name")
-        player = Player.objects.get(id=game_data.get("id"))
+        player = Player.objects.get(id=player_data.get("id"))
         player.needs_match = True
         player.name = name
         player.save(update_fields=["name", "needs_match"])
-        game_data.update({"name": name})
+        player_data.update({"name": name})
 
         # Checks the players that need a match
         for p in Player.objects.filter(needs_match=True):
             # Makes sure player is not matched with self
-            if p.id != game_data.get("id"):
-                game_data.update({"needs_match": False})
-                game_data.update({"opponent": p.id})
+            if p.id != player_data.get("id"):
+                player_data.update({"needs_match": False})
+                player_data.update({"opponent": p.id})
                 p.needs_match = False
                 p.opponent = player.id
                 p.save(update_fields=["needs_match", "opponent"])
@@ -36,7 +36,7 @@ class Lobby(DetailView):
                 player.opponent = p.id
                 player.save(update_fields=["needs_match", "opponent"])
 
-        request.session["game_data"] = game_data
+        request.session["player_data"] = player_data
         response = redirect("/room/")
         return response
 
@@ -50,13 +50,14 @@ class Room(DetailView):
         If no opponent the default is used.
         """
 
-        game_data = request.session["game_data"]
-        player = Player.objects.get(id=game_data.get("id"))
-        game_data = player.to_dict()
-        if game_data["opponent"] != 0:
-            opponent = Player.objects.get(id=game_data["opponent"])
-            game_data.update({"opponent": opponent.id})
-            game_data.update({"started": False})
-            request.session["game_data"] = game_data
+        player_data = request.session["player_data"]
+        player = Player.objects.get(id=player_data.get("id"))
+        player_data = player.to_dict()
+        if player_data["opponent"] != 0:
+            opponent = Player.objects.get(id=player_data["opponent"])
+            player_data.update({"opponent": opponent.id})
+            player_data.update({"game_id": 0})
+            player_data.update({"started": False})
+            request.session["player_data"] = player_data
             return redirect("/game/")
-        return render(request, self.template_name, game_data)
+        return render(request, self.template_name, player_data)
